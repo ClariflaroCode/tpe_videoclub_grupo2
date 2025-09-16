@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+main {
+    max-width: 2000px;
+    padding: 20px;
+}
+.input, .button {
+    padding: .5rem;
+}
+fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+.button {
+    width: 20%;
+    border-radius: 10px;
+    align-self: center;
+}
+.nav-list {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    padding: 1rem;
+}
+.card {
+    box-shadow: 1px 1px 1px 1px gray;
+    padding: 1rem;
+}
+.card-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1rem;
+}
