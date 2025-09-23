@@ -11,5 +11,3 @@ Proyecto de videoclub creado para la cátedra de Web 2.
 [DER](videoclub_derext.pdf)
 
 **SQL**: [SQL](tpe.sql)
-
-Nota: el nombre que tiene en vertabelo el derext es porque al principio teníamos la intención que fuese un videoclub que vendiera pelis y videojuegos. 
