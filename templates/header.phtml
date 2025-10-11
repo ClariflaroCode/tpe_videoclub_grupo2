@@ -1,0 +1,27 @@
+<?php
+require_once "auth_middleware.php";
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Películas</title>
+    <link rel="stylesheet" href="<?= BASE_URL ?>css/styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <h1><a href="<?= BASE_URL ?>peliculas">Catálogo de Películas</a></h1>
+        <nav>
+            <ul>
+                <li><a href="<?= BASE_URL ?>peliculas">Inicio</a></li>
+                <li><a href="<?= BASE_URL ?>about">Acerca de</a></li>
+                <?php if(!isLoggedIn()): ?>
+                    <li><a href="<?= BASE_URL ?>login">Login</a></li>
+                <?php elseif(isAdmin()): ?>
+                    <li><a href="<?= BASE_URL ?>admin">Panel Admin</a></li>
+                    <li><a href="<?= BASE_URL ?>logout">Cerrar sesión</a></li>
+                <?php endif; ?>
+            </ul>
+        </nav>
+    </header>
+    <main>
