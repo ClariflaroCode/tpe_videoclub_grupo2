@@ -140,6 +140,7 @@ function showMovieForm($movie = null, $directors, $error = '') {
     $valDuracion = $movie->duracion ?? '';
     $valDescripcion = $movie->descripcion ?? '';
     $valPrecio = $movie->precio ?? '';
+    $valImagen = $movie->imagen ?? '';
     $valFecha = $movie->fecha_lanzamiento ?? '';
     $valAtp = $movie->atp ?? '';
     $valDistribuidora = $movie->distribuidora ?? '';
@@ -160,7 +161,7 @@ function showMovieForm($movie = null, $directors, $error = '') {
     echo "<input type='number' name='precio' class='input' value='$valPrecio' required>";
 
     echo "<label>URL Imagen</label>";
-    echo "<input type='text' name='imagen' class='input' value='$valUrl' required>";
+    echo "<input type='text' name='imagen' class='input' value='$valImagen' required>";
 
     echo "<label>Fecha de Lanzamiento</label>";
     echo "<input type='date' name='fecha' class='input' value='$valFecha' required>";
