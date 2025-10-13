@@ -13,7 +13,7 @@ class movie_view {
             echo "<p>" . $movie->descripcion . "</p>";
             echo "<p class='precio'>Precio: $" . $movie->precio . "</p>";
             echo "<p class='director'>Director: " . $movie->nombre_director . "</p>";
-            echo "<p class='categoria'>Género: " . $movie->genero . "</p>"; // Género agregado
+            echo "<p class='categoria'>Género: " . $movie->genero . "</p>";
             echo "<a href='" . BASE_URL . "peliculas/{$movie->id}'>Ver más</a>";
             echo "</article>";
         }
@@ -87,23 +87,30 @@ function showAdminMovies($movies) {
     echo "<thead>
             <tr>
                 <th>Título</th>
+                <th>Duración</th>
+                <th>Fecha de Lanzamiento</th>
+                <th>ATP</th>
                 <th>Director</th>
+                <th>Distribuidora</th>
                 <th>Género</th>
                 <th>Precio</th>
-                <th>Acciones</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
           </thead>";
     echo "<tbody>";
     foreach($movies as $movie) {
         echo "<tr>";
         echo "<td>{$movie->titulo}</td>";
+        echo "<td>{$movie->duracion}</td>";
+        echo "<td>{$movie->fecha_lanzamiento}</td>";
+        echo "<td>{$movie->atp}</td>";
         echo "<td>{$movie->nombre_director}</td>";
+        echo "<td>{$movie->distribuidora}</td>";
         echo "<td>{$movie->genero}</td>";
         echo "<td>$ {$movie->precio}</td>";
-        echo "<td>
-                <a class='button' href='" . BASE_URL . "admin/edit/{$movie->id}'>Editar</a>
-                <a class='button' href='" . BASE_URL . "admin/delete/{$movie->id}'>Eliminar</a>
-              </td>";
+        echo "<td> <a class='button' href='" . BASE_URL . "admin/edit/{$movie->id}'>Editar</a></td>";
+        echo "<td><a class='button' href='" . BASE_URL . "admin/delete/{$movie->id}'>Eliminar</a></td>";
         echo "</tr>";
     }
     echo "</tbody>";
@@ -126,22 +133,43 @@ function showMovieForm($movie = null, $directors, $error = '') {
     if ($error) echo "<p class='login-error'>$error</p>";
 
     echo "<form method='POST' action='" . BASE_URL . "admin/$accion' class='admin-form'>";
-    if ($movie) echo "<input type='hidden' name='id' value='{$movie->id}'>";
-
+    if ($movie){ 
+        echo "<input type='hidden' name='id' value='{$movie->id}'>";
+    }
     $valTitulo = $movie->titulo ?? '';
+    $valDuracion = $movie->duracion ?? '';
     $valDescripcion = $movie->descripcion ?? '';
     $valPrecio = $movie->precio ?? '';
+    $valFecha = $movie->fecha_lanzamiento ?? '';
+    $valAtp = $movie->atp ?? '';
+    $valDistribuidora = $movie->distribuidora ?? '';
+    $valUrl = $movie->url ?? '';
     $valGenero = $movie->genero ?? '';
     $valDirectorId = $movie->director_id ?? '';
 
     echo "<label>Título</label>";
     echo "<input type='text' name='titulo' class='input' value='$valTitulo' required>";
 
+    echo "<label>Duracion</label>";
+    echo "<input type='number' name='duracion' class='input' value='$valDuracion' required>";
+
     echo "<label>Descripción</label>";
     echo "<textarea name='descripcion' class='input' required>$valDescripcion</textarea>";
 
     echo "<label>Precio</label>";
     echo "<input type='number' name='precio' class='input' value='$valPrecio' required>";
+
+    echo "<label>URL Imagen</label>";
+    echo "<input type='text' name='imagen' class='input' value='$valUrl' required>";
+
+    echo "<label>Fecha de Lanzamiento</label>";
+    echo "<input type='date' name='fecha' class='input' value='$valFecha' required>";
+
+    echo "<label>ATP</label>";
+    echo "<input type='number' name='atp' class='input' value='$valAtp' required>";
+
+    echo "<label>Distribuidora</label>";
+    echo "<input type='text' name='distribuidora' class='input' value='$valDistribuidora' required>";
 
     echo "<label>Género</label>";
     echo "<select name='genero' class='input' required>";
@@ -163,7 +191,7 @@ function showMovieForm($movie = null, $directors, $error = '') {
     echo "<button type='submit' class='button'>$buttonText</button>";
     echo "</form>";
     echo "</section>";
-    require 'templates/footer.phtml';
+    require_once 'templates/footer.phtml';
 }
 
 }

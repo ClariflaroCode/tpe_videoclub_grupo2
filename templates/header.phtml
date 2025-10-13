@@ -15,11 +15,13 @@ require_once "auth_middleware.php";
             <ul>
                 <li><a href="<?= BASE_URL ?>peliculas">Inicio</a></li>
                 <li><a href="<?= BASE_URL ?>about">Acerca de</a></li>
-                <?php if(!isLoggedIn()): ?>
-                    <li><a href="<?= BASE_URL ?>login">Login</a></li>
-                <?php elseif(isAdmin()): ?>
+                <?php if (isAdmin()): ?>
                     <li><a href="<?= BASE_URL ?>admin">Panel Admin</a></li>
-                    <li><a href="<?= BASE_URL ?>logout">Cerrar sesión</a></li>
+                <?php endif; ?>
+                <?php if (!isLoggedIn()): ?>
+                    <li><a href="<?= BASE_URL ?>login">Login</a></li>
+                    <?php else: ?>
+                        <li><a href="<?= BASE_URL ?>logout">Cerrar Sesion</a></li>
                 <?php endif; ?>
             </ul>
         </nav>

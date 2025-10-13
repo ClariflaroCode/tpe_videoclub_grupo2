@@ -20,17 +20,22 @@ class admin_controller {
 
   public function addMovieForm($error = '') {
     $directors = $this->model->getDirectors();
-    $this->view->showMovieForm(null, $directors, $error); // antes showAddMovie
+    $this->view->showMovieForm(null, $directors, $error);
 }
 
     public function addMovie() {
         $titulo = $_POST['titulo'];
         $descripcion = $_POST['descripcion'];
+        $duracion = $_POST['duracion'];
+        $fecha_lanzamiento = $_POST['fecha'];
+        $imagen = $_POST['imagen'];
+        $atp = $_POST['atp'];
+        $distribuidora = $_POST['distribuidora'];
         $precio = $_POST['precio'];
         $director_id = $_POST['director_id'];
         $genero = $_POST['genero'];
 
-        if($this->model->addMovie($titulo, $descripcion, $precio, $director_id, $genero)) {
+        if($this->model->addMovie($titulo, $duracion, $imagen, $precio, $descripcion, $fecha_lanzamiento, $atp, $director_id, $genero, $distribuidora)) {
             header("Location: " . BASE_URL . "admin/movies");
         } else {
             $this->addMovieForm("Error al agregar la película.");
@@ -47,11 +52,15 @@ class admin_controller {
         $id = $_POST['id'];
         $titulo = $_POST['titulo'];
         $descripcion = $_POST['descripcion'];
+        $duracion = $_POST['duracion'];
+        $fecha_lanzamiento = $_POST['fecha'];
+        $atp = $_POST['atp'];
+        $distribuidora = $_POST['distribuidora'];
         $precio = $_POST['precio'];
         $director_id = $_POST['director_id'];
         $genero = $_POST['genero'];
 
-        if($this->model->updateMovie($id, $titulo, $descripcion, $precio, $genero)) {
+        if($this->model->updateMovie($id, $titulo, $duracion, $precio, $descripcion, $fecha_lanzamiento, $atp, $genero, $distribuidora)) {
             header("Location: " . BASE_URL . "admin/movies");
         } else {
             $this->editMovieForm($id, "Error al editar la película.");

@@ -7,7 +7,6 @@ require_once "auth_middleware.php";
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
 $controller = new movie_controller();
-$admin_controller = new admin_controller();
 $view = new movie_view();
 
 
@@ -41,8 +40,8 @@ switch ($params[0]) {
             $view->showLogin();
         }   
     break;
-
     case "admin":
+    $admin_controller = new admin_controller();
     if (!isset($params[1])) $params[1] = 'movies';
     switch($params[1]){
         case 'movies':

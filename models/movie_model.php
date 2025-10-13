@@ -101,19 +101,19 @@ SQL;
     return $query->fetchAll(PDO::FETCH_OBJ);
 }
 
-    public function addMovie($titulo, $descripcion, $precio, $director_id, $genero) {
+    public function addMovie($titulo, $duracion, $imagen, $precio, $descripcion, $fecha_lanzamiento, $atp, $director_id, $genero, $distribuidora) {
     $query = $this->db->prepare(
-        'INSERT INTO pelicula (titulo, descripcion, precio, director_id, genero) 
-         VALUES (?, ?, ?, ?, ?)'
+        'INSERT INTO pelicula (titulo, duracion,imagen, precio, descripcion, fecha_lanzamiento, atp, director_id, genero,distribuidora) 
+         VALUES (?, ?, ?, ?, ?,?, ?, ?, ?, ?)'
     );
-    return $query->execute([$titulo, $descripcion, $precio, $director_id, $genero]);
+    return $query->execute([$titulo, $duracion, $imagen, $precio, $descripcion, $fecha_lanzamiento, $atp, $director_id, $genero, $distribuidora]);
 }
 
-    public function updateMovie($id, $titulo, $descripcion, $precio, $genero) {
+    public function updateMovie($id, $titulo, $duracion, $precio, $descripcion, $fecha_lanzamiento, $atp, $genero, $distribuidora) {
         $query = $this->db->prepare(
-            'UPDATE pelicula SET titulo=?, descripcion=?, precio=?, genero=? WHERE id=?'
+            'UPDATE pelicula SET titulo=?, duracion=?, precio=?, descripcion=?, fecha_lanzamiento=?, atp=? , genero=?,  distribuidora=? WHERE id=?'
         );
-        return $query->execute([$titulo, $descripcion, $precio, $genero, $id]);
+        return $query->execute([$titulo, $duracion, $precio, $descripcion, $fecha_lanzamiento, $atp, $genero, $distribuidora, $id]);
     }
 
     public function deleteMovie($id) {

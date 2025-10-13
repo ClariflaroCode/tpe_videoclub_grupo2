@@ -321,6 +321,18 @@ main {
     font-size: 1em;
 }
 
+.admin-form textarea.input {
+    height: 100px;     
+    max-height: 180px;    
+    resize: vertical;     
+    overflow-y: auto; 
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+
 .admin-form button {
     padding: 12px;
     background: #1a237e;
@@ -336,6 +348,20 @@ main {
 
 .admin-form button:hover {
     background: #3949ab;
+}
+
+.admin-table .button {
+    display: inline-block; 
+    width: auto;            
+    margin-right: 8px;      
+    padding: 6px 12px;
+    font-size: 0.9em;
+}
+
+.admin-form button {
+    display: block;
+    width: 100%;          
+    padding: 12px;
 }
 
 .main-footer {
