@@ -72,6 +72,7 @@ class admin_controller {
             header("Location: " . BASE_URL . "admin/movies");
         } else {
             $this->view->showError('Error al eliminar la película');
+
         }
     }
 }
