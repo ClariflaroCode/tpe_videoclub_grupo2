@@ -69,6 +69,6 @@ switch ($params[0]) {
     }
     break;
     default:
-        $view->showError();
+        $view->showError('Error 404: Página no encontrada');
         break;
     }

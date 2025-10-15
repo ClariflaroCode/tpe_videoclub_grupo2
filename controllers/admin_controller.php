@@ -71,7 +71,7 @@ class admin_controller {
         if($this->model->deleteMovie($id)) {
             header("Location: " . BASE_URL . "admin/movies");
         } else {
-            echo "Error al eliminar la película.";
+            $this->view->showError('Error al eliminar la película');
         }
     }
 }

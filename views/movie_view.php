@@ -38,15 +38,14 @@ class movie_view {
             echo "</div>";
             echo "</section>";
         } else {
-            $this->showError();
+            $this->showError('La película no existe.');
         }
 
         require 'templates/footer.phtml';
     }
 
-    function showError() {
-        echo "<h2>Error 404</h2>";
-        echo "<p>Página no encontrada.</p>";
+    function showError($error) {
+        echo "<h2>$error</h2>";
         echo "<a href='" . BASE_URL . "peliculas'>Volver</a>";
     }
 
