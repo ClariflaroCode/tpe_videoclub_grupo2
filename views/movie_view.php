@@ -50,6 +50,13 @@ class movie_view {
         echo "<a href='" . BASE_URL . "peliculas'>Volver</a>";
     }
 
+    function showMovieError($message) {
+        require 'templates/header.phtml';
+        echo "$message";
+        echo "<a href='" . BASE_URL . "peliculas'>Volver</a>";
+        require 'templates/footer.phtml';
+    }
+
   function showLogin($error = '') {
     require 'templates/header.phtml';
 
