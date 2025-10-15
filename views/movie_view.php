@@ -22,7 +22,7 @@ class movie_view {
         require 'templates/footer.phtml';
     }
 
-    function showMovieById($movie) {
+    function showMovieById($movie, $request) {
         require 'templates/header.phtml';
 
         if ($movie) {
@@ -38,26 +38,26 @@ class movie_view {
             echo "</div>";
             echo "</section>";
         } else {
-            $this->showError('La película no existe.');
+            $this->showError('La película no existe', $request);
         }
 
         require 'templates/footer.phtml';
     }
 
-    function showError($error) {
+    function showError($error, $request) {
         echo "<h2>$error</h2>";
         echo "<a href='" . BASE_URL . "peliculas'>Volver</a>";
     }
 
-    function showMovieError($message) {
-        require 'templates/header.phtml';
+    function showMovieError($message, $request) {
+        require './templates/header.phtml';
         echo "$message";
         echo "<a href='" . BASE_URL . "peliculas'>Volver</a>";
         require 'templates/footer.phtml';
     }
 
-  function showLogin($error = '') {
-    require 'templates/header.phtml';
+  function showLogin($error = '', $request) {
+    require './templates/header.phtml';
 
     echo "<section class='pelicula-detalle'>";
     echo "<div class='pelicula-detalle-info login-form'>";
@@ -85,7 +85,7 @@ class movie_view {
     require 'templates/footer.phtml';
 }
 
-function showAdminMovies($movies) {
+function showAdminMovies($movies, $request) {
     require 'templates/header.phtml';
     echo "<section class='admin-page'>";
     echo "<h2>Listado de Películas</h2>";
@@ -127,7 +127,7 @@ function showAdminMovies($movies) {
 }
 
 
-function showMovieForm($movie = null, $directors, $error = '') {
+function showMovieForm($movie = null, $directors, $error = '', $request) {
     require 'templates/header.phtml';
     echo "<section class='admin-page'>";
     $accion = $movie ? 'edit' : 'add';

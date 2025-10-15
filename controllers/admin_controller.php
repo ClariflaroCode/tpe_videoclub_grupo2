@@ -1,29 +1,29 @@
 <?php
 require_once 'models/movie_model.php';
 require_once 'views/movie_view.php';
-require_once 'auth_middleware.php';
+require_once 'controllers/auth_controller.php';
 
 class admin_controller {
     private $model;
     private $view;
 
     public function __construct() {
-        requireAdmin();
+        $auth = new auth_controller();
         $this->model = new movie_model();
         $this->view = new movie_view();
     }
 
-    public function listMovies() {
+    public function listMovies($request) {
         $movies = $this->model->getMovies();
-        $this->view->showAdminMovies($movies);
+        $this->view->showAdminMovies($movies, $request);
     }
 
-  public function addMovieForm($error = '') {
+  public function addMovieForm($error = '', $request) {
     $directors = $this->model->getDirectors();
-    $this->view->showMovieForm(null, $directors, $error);
+    $this->view->showMovieForm(null, $directors, $error, $request);
 }
 
-    public function addMovie() {
+    public function addMovie($request) {
         $titulo = $_POST['titulo'];
         $descripcion = $_POST['descripcion'];
         $duracion = $_POST['duracion'];
@@ -38,17 +38,17 @@ class admin_controller {
         if($this->model->addMovie($titulo, $duracion, $imagen, $precio, $descripcion, $fecha_lanzamiento, $atp, $director_id, $genero, $distribuidora)) {
             header("Location: " . BASE_URL . "admin/movies");
         } else {
-            $this->addMovieForm("Error al agregar la película.");
+            $this->addMovieForm("Error al agregar la película.", $request);
         }
     }
 
-    public function editMovieForm($id, $error = '') {
+    public function editMovieForm($id, $error = '', $request) {
     $movie = $this->model->getMovieById($id);
     $directors = $this->model->getDirectors();
-    $this->view->showMovieForm($movie, $directors, $error); 
+    $this->view->showMovieForm($movie, $directors, $error, $request); 
 }
 
-    public function editMovie() {
+    public function editMovie($request) {
         $id = $_POST['id'];
         $titulo = $_POST['titulo'];
         $descripcion = $_POST['descripcion'];
@@ -63,15 +63,15 @@ class admin_controller {
         if($this->model->updateMovie($id, $titulo, $duracion, $precio, $descripcion, $fecha_lanzamiento, $atp, $genero, $distribuidora)) {
             header("Location: " . BASE_URL . "admin/movies");
         } else {
-            $this->editMovieForm($id, "Error al editar la película.");
+            $this->editMovieForm($id, "Error al editar la película.", $request);
         }
     }
 
-    public function deleteMovie($id) {
-        if($this->model->deleteMovie($id)) {
+    public function deleteMovie($id, $request) {
+        if($this->model->deleteMovie($id, $request)) {
             header("Location: " . BASE_URL . "admin/movies");
         } else {
-            $this->view->showError('Error al eliminar la película');
+            $this->view->showError('Error al eliminar la película', $request);
         }
     }
 }
