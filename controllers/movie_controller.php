@@ -20,4 +20,12 @@ class movie_controller {
         $movie = $this->model->getMovieById($id);
         $this->view->showMovieById($movie);
     }
+
+    public function showError($error, $request) {
+        $this->view->showError($error,$request);
+    }
+
+    public function showLogin($error, $request) {
+        $this->view->showLogin($error,$request);
+    }
 }

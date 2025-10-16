@@ -2,7 +2,6 @@
 session_start();
 require_once "controllers/movie_controller.php";
 require_once "controllers/admin_controller.php";
-require_once "views/movie_view.php";
 require_once "middlewares/session_middleware.php";
 require_once "middlewares/guard_middleware.php";
 require_once "controllers/auth_controller.php";
@@ -10,7 +9,6 @@ require_once "controllers/auth_controller.php";
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
 $controller = new movie_controller();
-$view = new movie_view();
 
 $sessionMiddleware = new SessionMiddleware();
 $request = $sessionMiddleware->run(new stdClass());
@@ -40,10 +38,10 @@ switch ($params[0]) {
             if($auth->login($_POST['usuario'], $_POST['password'])) {
                 header("Location: " . BASE_URL . "peliculas");
             } else {
-                $view->showLogin("Usuario o contraseña incorrecta", $request);
+                $controller->showLogin("Usuario o contraseña incorrecta", $request);
             }
         } else {
-            $view->showLogin(null, $request);
+            $controller->showLogin(null, $request);
         }   
     break;
     case "admin":
@@ -77,6 +75,6 @@ switch ($params[0]) {
     }
     break;
     default:
-        $view->showError('Error 404: Página no encontrada', $request);
+        $controller->showError('Error 404: Página no encontrada', $request);
         break;
     }

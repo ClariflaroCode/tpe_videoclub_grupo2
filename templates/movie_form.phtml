@@ -1,0 +1,74 @@
+<section class="admin-page">
+    <?php
+        $accion = $movie ? 'edit' : 'add';
+        $tituloForm = $movie ? 'Editar Película' : 'Agregar Película';
+        $buttonText = $movie ? 'Guardar Cambios' : 'Agregar';
+
+        $valTitulo = $movie->titulo ?? '';
+        $valDuracion = $movie->duracion ?? '';
+        $valDescripcion = $movie->descripcion ?? '';
+        $valPrecio = $movie->precio ?? '';
+        $valImagen = $movie->imagen ?? '';
+        $valFecha = $movie->fecha_lanzamiento ?? '';
+        $valAtp = $movie->atp ?? '';
+        $valDistribuidora = $movie->distribuidora ?? '';
+        $valUrl = $movie->url ?? '';
+        $valGenero = $movie->genero ?? '';
+        $valDirectorId = $movie->director_id ?? '';
+        $generos = ['Acción', 'Comedia', 'Drama', 'Terror', 'Romance', 'Suspenso'];
+    ?>
+
+    <h2><?= $tituloForm ?></h2>
+
+    <?php if ($error): ?>
+        <p class="login-error"><?= $error ?></p>
+    <?php endif; ?>
+
+    <form method="POST" action="<?= BASE_URL ?>admin/<?= $accion ?>" class="admin-form">
+        <?php if ($movie): ?>
+            <input type="hidden" name="id" value="<?= $movie->id ?>">
+        <?php endif; ?>
+
+        <label>Título</label>
+        <input type="text" name="titulo" class="input" value="<?= $valTitulo ?>" required>
+
+        <label>Duración</label>
+        <input type="number" name="duracion" class="input" value="<?= $valDuracion ?>" required>
+
+        <label>Descripción</label>
+        <textarea name="descripcion" class="input" required><?= $valDescripcion ?></textarea>
+
+        <label>Precio</label>
+        <input type="number" name="precio" class="input" value="<?= $valPrecio ?>" required>
+
+        <label>URL Imagen</label>
+        <input type="text" name="imagen" class="input" value="<?= $valImagen ?>" required>
+
+        <label>Fecha de Lanzamiento</label>
+        <input type="date" name="fecha" class="input" value="<?= $valFecha ?>" required>
+
+        <label>ATP</label>
+        <input type="number" name="atp" class="input" value="<?= $valAtp ?>" required>
+
+        <label>Distribuidora</label>
+        <input type="text" name="distribuidora" class="input" value="<?= $valDistribuidora ?>" required>
+
+        <label>Género</label>
+        <select name="genero" class="input" required>
+            <?php foreach ($generos as $g): ?>
+                <option value="<?= $g ?>" <?= ($valGenero == $g) ? 'selected' : '' ?>><?= $g ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <label>Director</label>
+        <select name="director_id" class="input" required>
+            <?php foreach ($directors as $d): ?>
+                <option value="<?= $d->id ?>" <?= ($valDirectorId == $d->id) ? 'selected' : '' ?>>
+                    <?= $d->nombre ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+
+        <button type="submit" class="button"><?= $buttonText ?></button>
+    </form>
+</section>
