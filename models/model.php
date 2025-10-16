@@ -45,7 +45,7 @@ CREATE TABLE usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(40) NOT NULL,
     email VARCHAR(40) NOT NULL,
-    password VARCHAR(40) NOT NULL
+    password TEXT NOT NULL
 );
 
 INSERT INTO director (nombre, sexo, fecha_nacimiento, reputacion, pais_origen) VALUES
@@ -61,8 +61,8 @@ INSERT INTO pelicula (titulo, duracion, imagen, precio, descripcion, fecha_lanza
 ('terminator', 108, 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSsVMuYOj7eYifN6uZjCEkFfqBSOQRqcdvbDjSoBzAMWRQiB6EwYZoDwCJEERPmgNVHuIvBCAv6K0eUQO9tLYt53e8hroLLN3SF5Z3q7tR2', 600.00, 'Un asesino cibernético del futuro es enviado a Los Ángeles para matar a la mujer que procreará a un líder.
 ', '1984-10-26', 1, 3, 'ciencia ficcion', 'orion pictures');
 
-INSERT INTO usuario (nombre, email, 'password') VALUES
-('webadmin', 'webadmin@gmail.com', $hash)
+INSERT INTO usuario (nombre, email, password) VALUES
+('webadmin', 'webadmin@gmail.com', "$hash");
 SQL;
 
         $this->db->exec($sql);

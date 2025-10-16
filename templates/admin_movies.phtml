@@ -1,0 +1,38 @@
+<section class="admin-page">
+    <h2>Listado de Películas</h2>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Duración</th>
+                <th>Fecha de Lanzamiento</th>
+                <th>ATP</th>
+                <th>Director</th>
+                <th>Distribuidora</th>
+                <th>Género</th>
+                <th>Precio</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($movies as $movie): ?>
+                <tr>
+                    <td><?= htmlspecialchars($movie->titulo) ?></td>
+                    <td><?= htmlspecialchars($movie->duracion) ?></td>
+                    <td><?= htmlspecialchars($movie->fecha_lanzamiento) ?></td>
+                    <td><?= htmlspecialchars($movie->atp) ?></td>
+                    <td><?= htmlspecialchars($movie->nombre_director) ?></td>
+                    <td><?= htmlspecialchars($movie->distribuidora) ?></td>
+                    <td><?= htmlspecialchars($movie->genero) ?></td>
+                    <td>$ <?= htmlspecialchars($movie->precio) ?></td>
+                    <td><a class="button" href="<?= BASE_URL ?>admin/edit/<?= $movie->id ?>">Editar</a></td>
+                    <td><a class="button" href="<?= BASE_URL ?>admin/delete/<?= $movie->id ?>">Eliminar</a></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <a class="button" href="<?= BASE_URL ?>admin/add">Agregar Película</a>
+</section>

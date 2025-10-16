@@ -1,5 +1,5 @@
 <?php
-require_once "auth_middleware.php";
+require_once "./controllers/auth_controller.php";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -15,10 +15,10 @@ require_once "auth_middleware.php";
             <ul>
                 <li><a href="<?= BASE_URL ?>peliculas">Inicio</a></li>
                 <li><a href="<?= BASE_URL ?>about">Acerca de</a></li>
-                <?php if (isAdmin()): ?>
+                <?php if (empty($request->usuario->nombre)): ?>
                     <li><a href="<?= BASE_URL ?>admin">Panel Admin</a></li>
                 <?php endif; ?>
-                <?php if (!isLoggedIn()): ?>
+                <?php if (!empty($request->usuario->nombre)): ?>
                     <li><a href="<?= BASE_URL ?>login">Login</a></li>
                     <?php else: ?>
                         <li><a href="<?= BASE_URL ?>logout">Cerrar Sesion</a></li>

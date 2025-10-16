@@ -1,0 +1,23 @@
+<section class="pelicula-detalle">
+    <div class="pelicula-detalle-info login-form">
+        <h2>Inicio de sesión</h2>
+
+        <?php if ($error): ?>
+            <p class="login-error"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
+
+        <form method="POST" action="<?= BASE_URL ?>login">
+            <div class="form-group">
+                <label>Usuario</label>
+                <input type="text" name="usuario" class="input" placeholder="Ingrese su usuario" required>
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" name="password" class="input" placeholder="Ingrese su contraseña" required>
+            </div>
+
+            <button type="submit" class="button">Ingresar</button>
+        </form>
+    </div>
+</section>
