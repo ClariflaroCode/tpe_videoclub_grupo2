@@ -1,22 +1,30 @@
-<table>
-   <thead>
-       <th>Nombre</th>
-       <th>Sexo</th>
-       <th>Fecha nacimiento</th>
-       <th>Reputacion</th>
-       <th>Pais origen</th>
-   </thead>
-   <tbody>
-       <?php foreach ($directors as $director) ?>
-           <td><?= $director->nombre ?></td>
-           <td><?= $director->sexo ?></td>
-           <td><?= $director->fecha_nacimiento ?></td>
-           <td><?= $director->reputacion ?></td>
-           <td><?= $director->pais_origen ?> </td>
-           <td>
-               <a href="editar/<?= $director->id?>">Editar</a>
-               <a href="eliminar/<?= $director->id?>">Eliminar</a>
-           </td>
-       <?php  endforeach ?>
-   </tbody>
-</table>
+<section class="admin-page">
+    <h2>Lista de Directores</h2>
+    <table class="admin-table">
+        <thead>
+            <th>Nombre</th>
+            <th>Sexo</th>
+            <th>Fecha nacimiento</th>
+            <th>Reputacion</th>
+            <th>Pais origen</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            <?php foreach ($directors as $director): ?> 
+                <tr>
+                    <?php var_dump($director->id); ?>
+                    <td><?= $director->nombre ?></td>
+                    <td><?= $director->sexo ?></td>
+                    <td><?= $director->fecha_nacimiento ?></td>
+                    <td><?= $director->reputacion ?></td>
+                    <td><?= $director->pais_origen ?> </td>
+                    <td>
+                        <a class="button" href="edit_director/<?= $director->id?>">Editar</a>
+                        <a class="button" href="delete_director/<?= $director->id?>">Eliminar</a>
+                    </td>
+                </tr>
+            <?php  endforeach; ?>
+        </tbody>
+    </table>
+    <a class="button" href="add_director">Agregar</a>
+</section>

@@ -2,24 +2,24 @@
 
 class movie_view {
 
-    function showMovies($movies) {
-    require 'templates/header.phtml';
-    require 'templates/movies_list.phtml';
-    require 'templates/footer.phtml';
-}
+    function showMovies($movies, $directors) {
+        require 'templates/header.phtml';
+        require 'templates/movies_list.phtml';
+        require 'templates/footer.phtml';
+    }
 
 
     function showMovieById($movie) {
-    require 'templates/header.phtml';
+        require 'templates/header.phtml';
 
-    if ($movie) {
-        require 'templates/movie_detail.phtml';
-    } else {
-        $this->showError('La película no existe', $request);
+        if ($movie) {
+            require 'templates/movie_detail.phtml';
+        } else {
+            $this->showError('La película no existe', $request);
+        }
+
+        require 'templates/footer.phtml';
     }
-
-    require 'templates/footer.phtml';
-}
 
 
     function showError($error, $request) {
@@ -34,23 +34,23 @@ class movie_view {
         require 'templates/footer.phtml';
     }
 
- function showLogin($error = '', $request) {
-    require 'templates/header.phtml';
-    require 'templates/login_form.phtml';
-    require 'templates/footer.phtml';
-}
+    function showLogin($error = '', $request) {
+        require 'templates/header.phtml';
+        require 'templates/login_form.phtml';
+        require 'templates/footer.phtml';
+    }
 
 
-function showAdminMovies($movies) {
-    require 'templates/header.phtml';
-    require 'templates/admin_movies.phtml';
-    require 'templates/footer.phtml';
-}
+    function showAdminMovies($movies) {
+        require 'templates/header.phtml';
+        require 'templates/admin_movies.phtml';
+        require 'templates/footer.phtml';
+    }
 
 
-function showMovieForm($movie = null, $directors, $error = '', $request) {
-    require 'templates/header.phtml';
-    require 'templates/movie_form.phtml';
-    require 'templates/footer.phtml';
-}
+    function showMovieForm($movie = null, $directors, $error = '', $request) {
+        require 'templates/header.phtml';
+        require 'templates/movie_form.phtml';
+        require 'templates/footer.phtml';
+    }
 }

@@ -1,0 +1,16 @@
+
+<section class="peliculas-listado">
+    <?php foreach ($directors as $director): ?>
+        <article class="pelicula-card">
+            <h4><?= htmlspecialchars($director->nombre) ?></h4>
+
+            <img src="<?= htmlspecialchars($director->imagen) ?>" 
+                 alt="Imagen de <?= htmlspecialchars($director->nombre) ?>">
+
+            <p><?= htmlspecialchars($director->sexo) ?></p>
+            <p><?= htmlspecialchars($director->reputacion) ?></p>
+            <p><?= htmlspecialchars($director->fecha_nacimiento) ?></p>
+            <p><?= htmlspecialchars($director->pais_origen) ?></p>
+        </article>
+    <?php endforeach; ?>
+</section>

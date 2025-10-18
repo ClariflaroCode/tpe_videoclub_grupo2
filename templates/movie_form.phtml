@@ -1,6 +1,6 @@
 <section class="admin-page">
     <?php
-        $accion = $movie ? 'edit' : 'add';
+        $accion = $movie ? 'edit_movie' : 'add_movie';
         $tituloForm = $movie ? 'Editar Película' : 'Agregar Película';
         $buttonText = $movie ? 'Guardar Cambios' : 'Agregar';
 
@@ -26,7 +26,7 @@
 
     <form method="POST" action="<?= BASE_URL ?>admin/<?= $accion ?>" class="admin-form">
         <?php if ($movie): ?>
-            <input type="hidden" name="id" value="<?= $movie->id ?>">
+            <input type="hidden" name="id" value="<?= $movie->id ?>"> 
         <?php endif; ?>
 
         <label>Título</label>

@@ -1,46 +1,26 @@
 <?php
-   require_once 'director_model.php';
-   require_once 'director_view.php';
+   require_once 'models/director_model.php';
+   require_once 'views/director_view.php';
 
 
    class DirectorController {
-       private $model;
-       private $view;
+        private $model;
+        private $view;
 
 
-       function __construct() {
+        function __construct() {
            $this->model = new DirectorModel();
            $this->view = new DirectorView();
-       }
-       public function addDirector($nombre, $sexo, $reputacion, $nacimiento, $pais ) {
-           if (!empty($nombre) && isset($nombre)) {
-               if (!empty($sexo) && isset($sexo)) {
-                   if (!empty($nombre) && isset($nombre)) {
-                      
-                   } else {
-                       $this->view->error("Falta el nombre");
-                   }
-               } else {
-                   $this->view->error("Falta el sexo del director");
-               }
-           } else {
-               $this->view->error("Falta el nombre");
-           }
-       }
-       public function editDirector($id, $nombre, $sexo, $reputacion, $nacimiento, $pais ) {
+        }
 
-
-       }
-       public function deleteDirector($id){
-
-
-       }
-       public function showDirectors() {
-
-
-       }
+        public function showDirectors() {
+            $directors = $this->model->showDirectors();
+            $this->view->showDirectors($directors);
+        }
+        public function listDirectors() {
+            $directors = $this->model->showDirectors();
+            $this->view->listDirectors($directors);
+        }
    }   
 
-
-  
 ?>
