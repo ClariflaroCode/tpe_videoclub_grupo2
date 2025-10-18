@@ -1,58 +1,31 @@
-<form action="<?php echo $action_form ?>" method="POST">
-<<<<<<< HEAD
-    <fieldset>
-        <legend>Formulario de directores</legend>
-
-        <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del director">
-
-        <label for="sexo">Sexo</label>
-        <select name="sexo" id="sexo">
-            <option value="m">Masculino</option>
-            <option value="f">Femenino</option>
-        </select>
-
-        <label for="fecha_nacimiento">Fecha de nacimiento</label>
-        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
-
-        <label for="reputacion">Reputacion</label>
-        <input type="range" name="reputacion" id="reputacion" min="1" max="5">
-
-        <label for="pais_origen">Pais de origen </label>
-        <input type="text" name="pais_origen" id="pais_origen" placeholder="Ingrese el pais de origen">
-
-        <button type="submit">Enviar</button>
-    </fieldset>
-</form>
-=======
+<form action="<?php echo $action_form ?>" method="POST" class="admin-form">
    <fieldset>
        <legend>Formulario de directores</legend>
 
 
        <label for="nombre">Nombre</label>
-       <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del director">
+       <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del director" class="input" required>
 
 
        <label for="sexo">Sexo</label>
-       <select name="sexo" id="sexo">
+       <select name="sexo" id="sexo" class="input" required>
            <option value="m">Masculino</option>
            <option value="f">Femenino</option>
        </select>
 
 
        <label for="fecha_nacimiento">Fecha de nacimiento</label>
-       <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
+       <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="input" required>
 
 
        <label for="reputacion">Reputacion</label>
-       <input type="range" name="reputacion" id="reputacion" min="1" max="5">
+       <input type="range" name="reputacion" id="reputacion" min="1" max="5" required>
 
 
        <label for="pais_origen">Pais de origen </label>
-       <input type="text" name="pais_origen" id="pais_origen" placeholder="Ingrese el pais de origen">
+       <input type="text" name="pais_origen" id="pais_origen" placeholder="Ingrese el pais de origen" class="input" required>
 
 
-       <button type="submit">Enviar</button>
+       <button type="submit" class="button">Enviar</button>
    </fieldset>
 </form>
->>>>>>> b2a5c46c7fbd1af6025c9f8f319171dd24730314

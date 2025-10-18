@@ -27,12 +27,15 @@
                     <td><?= htmlspecialchars($movie->distribuidora) ?></td>
                     <td><?= htmlspecialchars($movie->genero) ?></td>
                     <td>$ <?= htmlspecialchars($movie->precio) ?></td>
-                    <td><a class="button" href="<?= BASE_URL ?>admin/edit/<?= $movie->id ?>">Editar</a></td>
-                    <td><a class="button" href="<?= BASE_URL ?>admin/delete/<?= $movie->id ?>">Eliminar</a></td>
+                    <td><a class="button" href="<?= BASE_URL ?>admin/edit_movie/<?= $movie->id ?>">Editar</a></td>
+                    <td><a class="button" href="<?= BASE_URL ?>admin/delete_movie/<?= $movie->id ?>">Eliminar</a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+    <section class="button-container">
+        <a class="button" href="<?= BASE_URL ?>admin/add_movie">Agregar Película</a>
+        <a class="button" href="<?= BASE_URL ?>admin/directors">Ver panel de directores</a>
+    </section>
 
-    <a class="button" href="<?= BASE_URL ?>admin/add">Agregar Película</a>
 </section>

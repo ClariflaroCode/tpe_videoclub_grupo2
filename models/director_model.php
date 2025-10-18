@@ -1,52 +1,36 @@
 <?php
-<<<<<<< HEAD
-    class DirectorModel() {
-        function __construct() {
-                
+    require_once 'config.php';
+    require_once 'model.php';
+
+    class DirectorModel extends model {
+
+        public function __construct() {
+            parent::__construct();
         }
         public function addDirector($nombre, $sexo, $reputacion, $nacimiento, $pais ) {
-            $query->prepare("INSERT INTO director VALUES (?,?,?,?,?)")
-            $query->exec([$nombre, $sexo, $reputacion, $nacimiento, $pais]);
-            return lastInsertID();
-        }
-        public function editDirector($id, $nombre, $sexo, $reputacion, $nacimiento, $pais) {
-            $query = $db->prepare("UPDATE director SET (?,?,?,?,?) WHERE id=?")
-            $query->exec([$nombre, $sexo, $reputacion, $nacimiento, $pais, $id]);
-        }
-        public function deleteDirector($id) {
-            $query = $db->prepare("DELETE FROM director WHERE id=?");
-            $query->exec([$id]);
-        }
-        public function showDirectors() {
-            $query = $db->prepare ("SELECT nombre, sexo, reputacion, fecha_nacimiento, pais_origen FROM director");
-            $directors = fetchAll(PDO::FETCH_OBJ);
-            return $directors; 
-        }
-    }
-?>
-=======
-   class DirectorModel() {
-       function __construct() {
-              
-       }
-       public function addDirector($nombre, $sexo, $reputacion, $nacimiento, $pais ) {
-           $query->prepare("INSERT INTO director VALUES (?,?,?,?,?)")
-           $query->exec([$nombre, $sexo, $reputacion, $nacimiento, $pais]);
-           return lastInsertID();
-       }
+           $query = $this->db->prepare("INSERT INTO director(nombre, sexo, reputacion,fecha_nacimiento, pais_origen) VALUES (?,?,?,?,?)");
+           return $query->execute([$nombre, $sexo, $reputacion, $nacimiento, $pais]);
+
+        } 
        public function editDirector($id, $nombre, $sexo, $reputacion, $nacimiento, $pais) {
-           $query = $db->prepare("UPDATE director SET (?,?,?,?,?) WHERE id=?")
-           $query->exec([$nombre, $sexo, $reputacion, $nacimiento, $pais, $id]);
-       }
+           $query = $this->db->prepare("UPDATE director SET nombre = ?, sexo=?,reputacion=?,fecha_nacimiento=?,pais_origen= ? WHERE id=?");
+           return $query->execute([$nombre, $sexo, $reputacion, $nacimiento, $pais, $id]); //devuelve falso si no se logra editar
+        }
        public function deleteDirector($id) {
-           $query = $db->prepare("DELETE FROM director WHERE id=?");
-           $query->exec([$id]);
-       }
+           $query = $this->db->prepare("DELETE FROM director WHERE id=?");
+           return $query->execute([$id]); //devolverá falso si no se logra eliminar
+        }
        public function showDirectors() {
-           $query = $db->prepare ("SELECT nombre, sexo, reputacion, fecha_nacimiento, pais_origen FROM director");
-           $directors = fetchAll(PDO::FETCH_OBJ);
+           $query = $this->db->prepare ("SELECT id, nombre, sexo, reputacion, fecha_nacimiento, pais_origen FROM director");
+           $query->execute();
+           $directors = $query->fetchAll(PDO::FETCH_OBJ);
            return $directors;
-       }
+        }
+       public function getDirectorById($id) {
+            $query = $this->db->prepare("SELECT * FROM director WHERE id=?");
+           $query->execute([$id]);
+           $director = $query->fetch(PDO::FETCH_OBJ);
+           return $director;
+        }
    }
 ?>
->>>>>>> b2a5c46c7fbd1af6025c9f8f319171dd24730314

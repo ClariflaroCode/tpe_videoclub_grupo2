@@ -1,3 +1,17 @@
+
+<section>
+    <form action="peliculas">
+        <label>Filtrar por director</label>
+        <select name="director_id" class="input" required>
+            <?php foreach ($directors as $d): ?>
+                <option value="<?= $d->id ?>">
+                    <?= $d->nombre ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+</section>
 <section class="peliculas-listado">
     <?php foreach ($movies as $movie): ?>
         <article class="pelicula-card">
