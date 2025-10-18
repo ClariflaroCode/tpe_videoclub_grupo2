@@ -19,14 +19,14 @@
         <tbody>
             <?php foreach ($movies as $movie): ?>
                 <tr>
-                    <td><?= htmlspecialchars($movie->titulo) ?></td>
-                    <td><?= htmlspecialchars($movie->duracion) ?></td>
-                    <td><?= htmlspecialchars($movie->fecha_lanzamiento) ?></td>
-                    <td><?= htmlspecialchars($movie->atp) ?></td>
-                    <td><?= htmlspecialchars($movie->nombre_director) ?></td>
-                    <td><?= htmlspecialchars($movie->distribuidora) ?></td>
-                    <td><?= htmlspecialchars($movie->genero) ?></td>
-                    <td>$ <?= htmlspecialchars($movie->precio) ?></td>
+                    <td><?= $movie->titulo ?></td>
+                    <td><?= $movie->duracion ?></td>
+                    <td><?= $movie->fecha_lanzamiento ?></td>
+                    <td><?= $movie->atp ?></td>
+                    <td><?= $movie->nombre_director ?></td>
+                    <td><?= $movie->distribuidora ?></td>
+                    <td><?= $movie->genero ?></td>
+                    <td>$ <?= $movie->precio ?></td>
                     <td><a class="button" href="<?= BASE_URL ?>admin/edit/<?= $movie->id ?>">Editar</a></td>
                     <td><a class="button" href="<?= BASE_URL ?>admin/delete/<?= $movie->id ?>">Eliminar</a></td>
                 </tr>

@@ -4,17 +4,17 @@
         $tituloForm = $movie ? 'Editar Película' : 'Agregar Película';
         $buttonText = $movie ? 'Guardar Cambios' : 'Agregar';
 
-        $valTitulo = $movie->titulo ?? '';
-        $valDuracion = $movie->duracion ?? '';
-        $valDescripcion = $movie->descripcion ?? '';
-        $valPrecio = $movie->precio ?? '';
-        $valImagen = $movie->imagen ?? '';
-        $valFecha = $movie->fecha_lanzamiento ?? '';
-        $valAtp = $movie->atp ?? '';
-        $valDistribuidora = $movie->distribuidora ?? '';
-        $valUrl = $movie->url ?? '';
-        $valGenero = $movie->genero ?? '';
-        $valDirectorId = $movie->director_id ?? '';
+
+        $Titulo = $movie->titulo ?? '';
+        $Duracion = $movie->duracion ?? '';
+        $Descripcion = $movie->descripcion ?? '';
+        $Precio = $movie->precio ?? '';
+        $Imagen = $movie->imagen ?? '';
+        $Fecha = $movie->fecha_lanzamiento ?? '';
+        $Atp = $movie->atp ?? '';
+        $Distribuidora = $movie->distribuidora ?? '';
+        $Genero = $movie->genero ?? '';
+        $DirectorId = $movie->director_id ?? '';
         $generos = ['Acción', 'Comedia', 'Drama', 'Terror', 'Romance', 'Suspenso'];
     ?>
 
@@ -30,40 +30,40 @@
         <?php endif; ?>
 
         <label>Título</label>
-        <input type="text" name="titulo" class="input" value="<?= $valTitulo ?>" required>
+        <input type="text" name="titulo" class="input" value="<?= $Titulo ?>" required>
 
         <label>Duración</label>
-        <input type="number" name="duracion" class="input" value="<?= $valDuracion ?>" required>
+        <input type="number" name="duracion" class="input" value="<?=$Duracion ?>" required>
 
         <label>Descripción</label>
-        <textarea name="descripcion" class="input" required><?= $valDescripcion ?></textarea>
+        <textarea name="descripcion" class="input" required><?= $Descripcion ?></textarea>
 
         <label>Precio</label>
-        <input type="number" name="precio" class="input" value="<?= $valPrecio ?>" required>
+        <input type="number" name="precio" class="input" value="<?= $Precio ?>" required>
 
         <label>URL Imagen</label>
-        <input type="text" name="imagen" class="input" value="<?= $valImagen ?>" required>
+        <input type="text" name="imagen" class="input" value="<?= $Imagen ?>" required>
 
         <label>Fecha de Lanzamiento</label>
-        <input type="date" name="fecha" class="input" value="<?= $valFecha ?>" required>
+        <input type="date" name="fecha" class="input" value="<?= $Fecha ?>" required>
 
         <label>ATP</label>
-        <input type="number" name="atp" class="input" value="<?= $valAtp ?>" required>
+        <input type="number" min='0' max='1' name="atp" class="input" value="<?= $Atp ?>" required>
 
         <label>Distribuidora</label>
-        <input type="text" name="distribuidora" class="input" value="<?= $valDistribuidora ?>" required>
+        <input type="text" name="distribuidora" class="input" value="<?= $Distribuidora ?>" required>
 
         <label>Género</label>
         <select name="genero" class="input" required>
             <?php foreach ($generos as $g): ?>
-                <option value="<?= $g ?>" <?= ($valGenero == $g) ? 'selected' : '' ?>><?= $g ?></option>
+                <option value="<?= $g ?>" <?= ($Genero == $g) ? 'selected' : '' ?>><?= $g ?></option>
             <?php endforeach; ?>
         </select>
 
         <label>Director</label>
         <select name="director_id" class="input" required>
             <?php foreach ($directors as $d): ?>
-                <option value="<?= $d->id ?>" <?= ($valDirectorId == $d->id) ? 'selected' : '' ?>>
+                <option value="<?= $d->id ?>" <?= ($DirectorId == $d->id) ? 'selected' : '' ?>>
                     <?= $d->nombre ?>
                 </option>
             <?php endforeach; ?>

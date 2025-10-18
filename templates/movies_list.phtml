@@ -1,16 +1,16 @@
 <section class="peliculas-listado">
     <?php foreach ($movies as $movie): ?>
         <article class="pelicula-card">
-            <h4><?= htmlspecialchars($movie->titulo) ?></h4>
+            <h4><?= $movie->titulo ?></h4>
 
-            <img src="<?= htmlspecialchars($movie->imagen) ?>" 
-                 alt="Imagen de <?= htmlspecialchars($movie->titulo) ?>">
+            <img src="<?= $movie->imagen ?>" 
+                 alt="Imagen de <?= $movie->titulo ?>">
 
-            <p><?= htmlspecialchars($movie->descripcion) ?></p>
+            <p><?= $movie->descripcion ?></p>
 
-            <p class="precio">Precio: $<?= htmlspecialchars($movie->precio) ?></p>
-            <p class="director">Director: <?= htmlspecialchars($movie->nombre_director) ?></p>
-            <p class="categoria">Género: <?= htmlspecialchars($movie->genero) ?></p>
+            <p class="precio">Precio: $<?= $movie->precio ?></p>
+            <p class="director">Director: <?= $movie->nombre_director ?></p>
+            <p class="categoria">Género: <?= $movie->genero ?></p>
 
             <a href="<?= BASE_URL ?>peliculas/<?= $movie->id ?>">Ver más</a>
         </article>
