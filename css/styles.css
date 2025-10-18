@@ -261,6 +261,17 @@ main {
     box-shadow: 0 2px 8px rgba(26,35,126,0.08);
 }
 
+.admin-page .button-container {
+    margin-top: 32px;
+    display: flex;
+    gap: 12px; 
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+}
+
+
+
 .admin-page .button:hover {
     background: #3949ab;
 }
@@ -270,6 +281,7 @@ main {
     max-width: 900px;
     border-collapse: collapse;
     margin-top: 24px;
+    margin-bottom: 32px;
     box-shadow: 0 2px 12px rgba(26,35,126,0.08);
 }
 
@@ -301,6 +313,7 @@ main {
     max-width: 600px;
     width: 100%;
     margin-top: 32px;
+    margin-bottom: 32px;
 }
 
 .admin-form label {

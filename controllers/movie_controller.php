@@ -21,8 +21,12 @@ class movie_controller {
         $directors = $this->model->getDirectors();
 
         $this->view->showMovies($movies, $directors);
-
     }
+
+    public function movieExists($id) {
+        $movie = $this->model->getMovieById($id);
+        return !empty($movie);
+}
 
     public function showMovie($id) {
         $movie = $this->model->getMovieById($id);

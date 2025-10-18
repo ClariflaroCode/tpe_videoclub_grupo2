@@ -24,10 +24,7 @@
         <p class="login-error"><?= $error ?></p>
     <?php endif; ?>
 
-    <form method="POST" action="<?= BASE_URL ?>admin/<?= $accion ?>" class="admin-form">
-        <?php if ($movie): ?>
-            <input type="hidden" name="id" value="<?= $movie->id ?>"> 
-        <?php endif; ?>
+    <form method="POST" class="admin-form" action="<?= BASE_URL ?>admin/<?= $accion ?>/<?= $movie->id ?? '' ?>">
 
         <label>Título</label>
         <input type="text" name="titulo" class="input" value="<?= $Titulo ?>" required>

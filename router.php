@@ -62,17 +62,20 @@ switch ($params[0]) {
         switch($params[1]){
             case 'movies':
                 $admin_controller->listMovies($request);
-                break;
+            break;
             case 'add_movie':
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $admin_controller->addMovie($request);
                 } else {
                     $admin_controller->addMovieForm(null,$request);
                 }
-                break;
+            break;
             case 'edit_movie':
                 $id = $params[2] ?? null;
-                var_dump($id);
+                if ($id === null || !$controller->movieExists($id)) {
+                    $controller->showError('La película no existe', $request);
+                break;
+                }
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $admin_controller->editMovie($request);
                 } else {
@@ -81,19 +84,23 @@ switch ($params[0]) {
                 break;
             case 'delete_movie':
                 $id = $params[2] ?? null;
-                $admin_controller->deleteMovie($id,$request);
+                if ($id === null || !$controller->movieExists($id)) {
+                    $controller->showError('La película no existe', $request);
                 break;
+                }
+                $admin_controller->deleteMovie($id,$request);
+            break;
 
             case 'directors':
                 $admin_controller->showDirectors($request);
-                break;
+            break;
             case 'add_director':
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $admin_controller->addDirector($request);
                 } else {
                     $admin_controller->showAddForm($request);
                 }
-                break;
+            break;
             case 'edit_director':
                 if (!empty($params[2]) && isset($params[2])) {
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -104,11 +111,11 @@ switch ($params[0]) {
                 } else {
                     $controller->showError('Error, no se insertó un id', $request);
                 }
-                break;
+            break;
             case 'delete_director':
                 $id = $params[2] ?? null;
                 $admin_controller->deleteDirector($id,$request);
-                break;
+            break;
 
         }
         break;

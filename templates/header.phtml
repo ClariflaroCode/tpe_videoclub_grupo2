@@ -20,8 +20,6 @@ require_once "./controllers/auth_controller.php";
                     <li><a href="<?= BASE_URL ?>admin">Panel Admin</a></li>
                 <?php endif; ?>
                 <?php if (!empty($request->usuario->nombre)): ?>
-                <!--TODO: el cerrar sesion se debe ver solo si esta logueado, --> 
-                <!--TODO:no se debe llamar panel admin se debe llamar login si no es usuarioadmin-->
                     <li><a href="<?= BASE_URL ?>login">Login</a></li>
                     <?php else: ?>           
                         <li><a href="<?= BASE_URL ?>logout">Cerrar Sesion</a></li>
