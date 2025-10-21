@@ -34,7 +34,7 @@ class movie_model extends model {
     }
     public function getMoviesByDirector($director_id) {
         $query = $this->db->prepare(
-            'SELECT p.* FROM pelicula p JOIN director d ON p.director_id = d.id WHERE director_id = ?'
+            'SELECT p.*, d.nombre as nombre_director FROM pelicula p JOIN director d ON p.director_id = d.id WHERE director_id = ?'
         );
         $query->execute([$director_id]);
         $movies = $query->fetchAll(PDO::FETCH_OBJ);
@@ -67,9 +67,5 @@ class movie_model extends model {
         $query = $this->db->prepare('DELETE FROM pelicula WHERE id=?');
         return $query->execute([$id]);
     }
-    public function moviesByThisDirector($id) { //filtrado
-        $query = $this->db->prepare("SELECT p.titulo, p.duracion,p.imagen, p.precio, p.descripcion, p.fecha_lanzamiento, p.atp, p.director_id, p.genero, p.distribuidora FROM director d LEFT JOIN pelicula p ON (p.director_id = d.id) WHERE d.id = ?");
-        $query->execute([$id]);
-        return $query->fetchAll(PDO::FETCH_OBJ);
-    }
+
 }

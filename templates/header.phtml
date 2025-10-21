@@ -16,10 +16,10 @@ require_once "./controllers/auth_controller.php";
                 <li><a href="<?= BASE_URL ?>peliculas">Peliculas</a></li>
                 <li><a href="<?= BASE_URL ?>directores">Directores</a></li>
                 <li><a href="<?= BASE_URL ?>about">Acerca de</a></li>
-                <?php if (empty($request->usuario->nombre)): ?>
+                <?php if (!empty($request->usuario)): ?>
                     <li><a href="<?= BASE_URL ?>admin">Panel Admin</a></li>
                 <?php endif; ?>
-                <?php if (!empty($request->usuario->nombre)): ?>
+                <?php if (empty($request->usuario)): ?>
                     <li><a href="<?= BASE_URL ?>login">Login</a></li>
                     <?php else: ?>           
                         <li><a href="<?= BASE_URL ?>logout">Cerrar Sesion</a></li>

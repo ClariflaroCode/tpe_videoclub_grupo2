@@ -1,29 +1,32 @@
-<form action="<?php echo $action_form ?>" method="POST" class="admin-form">
+<form action="<?= BASE_URL. "admin/" . "$action_form" ?>" method="POST" class="admin-form">
    <fieldset>
        <legend>Formulario de directores</legend>
 
 
        <label for="nombre">Nombre</label>
-       <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del director" class="input" required>
+       <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del director" class="input"  value="<?= $nombre ?>" required>
 
 
        <label for="sexo">Sexo</label>
-       <select name="sexo" id="sexo" class="input" required>
+       <select name="sexo" id="sexo" class="input" value= "<?= $sexo ?>" required>
            <option value="m">Masculino</option>
            <option value="f">Femenino</option>
        </select>
 
 
        <label for="fecha_nacimiento">Fecha de nacimiento</label>
-       <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="input" required>
+       <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="input" value="<?= $fecha ?>" required>
 
 
        <label for="reputacion">Reputacion</label>
-       <input type="range" name="reputacion" id="reputacion" min="1" max="5" required>
+       <input type="range" name="reputacion" id="reputacion" min="1" max="5" value="<?= $reputacion ?>" required>
 
 
        <label for="pais_origen">Pais de origen </label>
-       <input type="text" name="pais_origen" id="pais_origen" placeholder="Ingrese el pais de origen" class="input" required>
+       <input type="text" name="pais_origen" id="pais_origen" placeholder="Ingrese el pais de origen" class="input"  value= "<?= $pais ?>" required>
+
+       <label for="imagen">Imagen del director </label>
+       <input type="text" name="imagen" id="imagen" placeholder="Ingrese la url de la imagen" value="<?= $imagen ?>" class="input" required>
 
        <button type="submit" class="button">Enviar</button>
    </fieldset>

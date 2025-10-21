@@ -1,12 +1,12 @@
-<section class="pelicula-detalle">
+<section class="detalle">
     <img src="<?= htmlspecialchars($movie->imagen) ?>" alt="Imagen de <?= htmlspecialchars($movie->titulo) ?>">
 
-    <div class="pelicula-detalle-info">
+    <div class="detalle-info">
         <h2><?= htmlspecialchars($movie->titulo) ?></h2>
         <p><?= htmlspecialchars($movie->descripcion) ?></p>
-        <p class="precio">Precio: $<?= htmlspecialchars($movie->precio) ?></p>
-        <p class="director">Director: <?= htmlspecialchars($movie->nombre_director) ?></p>
-        <p class="categoria">Género: <?= htmlspecialchars($movie->genero) ?></p>
+        <p class="resaltado">Precio: $<?= htmlspecialchars($movie->precio) ?></p>
+        <p class="descripcion">Director: <?= htmlspecialchars($movie->nombre_director) ?></p>
+        <p class="descripcion">Género: <?= htmlspecialchars($movie->genero) ?></p>
         <a href="<?= BASE_URL ?>peliculas">Volver</a>
     </div>
 </section>

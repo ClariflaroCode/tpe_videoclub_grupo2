@@ -12,7 +12,7 @@ class admin_controller {
     private $directorView;
 
     public function __construct() {
-        $auth = new auth_controller();
+        //$auth = new auth_controller();
         $this->model = new movie_model();
         $this->view = new movie_view();
         $this->directorModel = new DirectorModel();
@@ -84,17 +84,17 @@ class admin_controller {
     public function showDirectors($request) {
         $directors = $this->directorModel->showDirectors();
 
-        $this->directorView->showDirectors($directors);
+        $this->directorView->showDirectors($directors, $request);
     }
 
     public function showAddForm($request) {
-        $this->directorView->showForm("add_director");
+        $this->directorView->showForm("add_director", null, $request);
     }
     
     public function showEditForm($id, $request) {
         $director = $this->directorModel->getDirectorById($id); //busca si pertenece a un director de la base de datos. 
         if ($director) {
-            $this->directorView->showForm("edit_director/" . $id);
+            $this->directorView->showForm("edit_director/" . $id,  $director, $request);
         } else {
             $this->directorView->showError("Director no encontrado");
         }
@@ -108,39 +108,47 @@ class admin_controller {
         $reputacion = $_POST["reputacion"];
         $nacimiento = $_POST["fecha_nacimiento"];
         $pais = $_POST["pais_origen"];
+        $imagen = $_POST["imagen"];
 
         if (
             !empty($nombre) && isset($nombre) &&
             !empty($sexo) && isset($sexo) &&
             !empty($reputacion) && isset($reputacion) &&
             !empty($nacimiento) && isset($nacimiento) &&
-            !empty($pais) && isset($pais) 
+            !empty($pais) && isset($pais) &&
+            !empty($imagen) && isset($imagen) 
         ) 
         {    
-            if ($this->directorModel->addDirector($nombre, $sexo, $reputacion, $nacimiento, $pais)) {
-                header("Location: " . BASE_URL . "admin/directors");
+            if ($this->validateDirectorInputs($_POST)) {
+                if ($this->directorModel->addDirector($nombre, $sexo, $reputacion, $nacimiento, $pais, $imagen)) {
+                    header("Location: " . BASE_URL . "admin/directors");
+                } else {
+                    $this->directorView->showError("Error al agregar un nuevo director");
+                }
             } else {
-                $this->directorView->showError("Error al agregar un nuevo director");
+                echo "error en la validacion";
             }
-        }
-        foreach ($_POST as $key => $value) {
-            if (empty($value)) {
-                echo "El campo '$key' está vacío.";
-                break;
+        } 
+        else {
+            foreach ($_POST as $key => $value) {
+                if (empty($value)) {
+                    $this->showPostDirectorError("$key");
+                    break;
+                }
             }
-        }
+
+        }   
 
 
     }
 
     public function editDirector($id, $request) {
-        var_dump($id); 
         $nombre = $_POST["nombre"];
         $sexo = $_POST["sexo"];
         $reputacion = $_POST["reputacion"];
         $nacimiento = $_POST["fecha_nacimiento"];
         $pais = $_POST["pais_origen"];
-
+        $imagen = $_POST["imagen"];
         
         if (
             !empty($id) && isset($id) &&
@@ -148,27 +156,36 @@ class admin_controller {
             !empty($sexo) && isset($sexo) &&
             !empty($reputacion) && isset($reputacion) &&
             !empty($nacimiento) && isset($nacimiento) &&
-            !empty($pais) && isset($pais) 
+            !empty($pais) && isset($pais) &&
+            !empty($imagen) && isset($imagen) 
         ) 
         {    
-            $director = $this->directorModel->getDirectorById($id); //busca si pertenece a un director de la base de datos. 
-            if ($director) { //si existe el director 
-                if ($this->directorModel->editDirector($id, $nombre, $sexo, $reputacion, $nacimiento, $pais)) {
-                    header("Location: " . BASE_URL . "admin/directors");
-                } else {
-                    $this->directorView->showError("Error al editar el director");
-                }
+            if ($this->validateDirectorInputs($_POST)) {
+                $director = $this->directorModel->getDirectorById($id); //busca si pertenece a un director de la base de datos. 
+                
+                if ($director) { //si existe el director 
+                    if ($this->directorModel->editDirector($id, $nombre, $sexo, $reputacion, $nacimiento, $pais, $imagen)) {
+                        header("Location: " . BASE_URL . "admin/directors");
+                    } else {
+                        $this->directorView->showError("Error al editar el director");
+                    }
 
-            } else {
-                $this->directorView->showError("Se intentó modificar un director inexistente");
+                } else {
+                    $this->directorView->showError("Se intentó modificar un director inexistente");
+                }
+            }else {
+                 $this->directorView->showError("Error de validacion");
             }
-        }      
-        foreach ($_POST as $key => $value) {
-            if (empty($value)) {//aca juancho quiere que el key quede bonito y no se llame como en la base de datos. 
-                $this->showPostDirectorError("El campo '$key' está vacío.");
-                break;
+
+        } else {
+            foreach ($_POST as $key => $value) {
+                if (empty($value)) {//aca juancho quiere que el key quede bonito
+                    $this->showPostDirectorError("$key");
+                    break;
+                }
             }
-        }
+
+        }     
 
     }
 
@@ -176,11 +193,17 @@ class admin_controller {
         if (!empty($id) && isset($id)){
             $director = $this->directorModel->getDirectorById($id); //busca si pertenece a un director de la base de datos. 
             if ($director) { //si existe el director  {
-                if ($this->directorModel->deleteDirector($id)) {
-                    header("Location: " . BASE_URL . "admin/directors");
-                } else {
-                    $this->directorView->showError("Error al eliminar el director");
+                $movies = $this->model->getMoviesByDirector($id);
+                if (count($movies) == 0) {
+                    if ($this->directorModel->deleteDirector($id)) {
+                        header("Location: " . BASE_URL . "admin/directors");
+                    } else {
+                        $this->directorView->showError("Error al eliminar el director");
+                    }
+                } else{
+                    $this->directorView->showError("No se pueden eliminar directores que tengan peliculas asociadas");
                 }
+
             } else {
                 $this->directorView->showError("Se intentó eliminar un director inexistente");
             }
@@ -195,14 +218,61 @@ class admin_controller {
             "sexo" => "sexo",
             "reputacion" => "reputacion",
             "fecha_nacimiento" => "fecha de nacimiento",
-            "pais_origen" => "pais de origen"
+            "pais_origen" => "pais de origen",
+            "imagen" => "imagen"
         ];
         $item = "";
-        foreach($campos as $campo) {
-            if ($error == $campo) {
-                $item = $campo;
+        foreach($campos as $clave =>$traduccion) {
+            if ($error == $clave) {
+                $item = $traduccion;
+                break;
             }
         }
-        $this->directorView->showError("Falta el completar el campo ". "$item");
+        $this->directorView->showError("Falta completar el campo ".$item);
+    }
+    public function validateDirectorInputs ($data) {
+        //esta funcion verifica los atributos de fecha, genero y reputacion sean válidos por si hay algún hacker por ahí dando vueltas.
+        define("MIN_REPUTACION", 1);
+        define("MAX_REPUTACION", 5);
+
+
+        $valuesForGenero = ["m", "f"];
+        if (!in_array($data['sexo'], $valuesForGenero)) {
+            $this->directorView->showError("El genero no es válido");
+            return false;
+        }
+
+        $fecha = $data['fecha_nacimiento'];
+        $arregloFecha = explode("-", $fecha);
+
+
+        //existe una funcion en php que hace lo que iba a hacer que es verificar que el mes este entre 01 y 12, 
+        // los dias entre 01 y 31 y ademas verifica que el mes y el dia tengan sentido para no mandarle un 30 de febrero, epic. 
+        if (count($arregloFecha) == 3) {
+            $anio = (int) $arregloFecha[0]; //dato muy de lenguajes, acá php devuelve 0 si se castea un texto que no empiece con numeros y si empieza con numeros los toma y los castea a los primeros ignorando el resto del texto
+            $mes = (int) $arregloFecha[1];
+            $dia = (int) $arregloFecha[2];
+
+            if (!checkdate($mes, $dia, $anio)) {
+                $this->directorView->showError("La fecha es incorrecta");
+                return false;
+            } 
+        } else {
+            $this->directorView->showError("La fecha no respeta el formato");
+            return false;
+        }
+
+        if (((int)$data['reputacion'] < MIN_REPUTACION) || ((int)$data['reputacion'] > MAX_REPUTACION)) {
+            $this->directorView->showError("La reputacion es incorrecta, ingrese un valor entre" . MIN_REPUTACION." y ". MAX_REPUTACION);
+            return false;
+        }
+
+        //quería validar que la url de la imagen sea una imagen verdaderamente verificando que termine
+        //  en formatos de imagen como .jpg, .jpeg, png, etc. pero las imagenes encriptadas de google u otras redes sociales a veces 
+        //no tienen esta extension o formato al final de la url... pero lo anterior se podría hacer con una expresion regular como las de ciencias 1 :)
+
+        return true;
+
+        
     }
 }

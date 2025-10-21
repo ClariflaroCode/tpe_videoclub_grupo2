@@ -2,14 +2,14 @@
 
 class movie_view {
 
-    function showMovies($movies, $directors) {
+    function showMovies($movies, $directors, $director, $request) {
         require 'templates/header.phtml';
         require 'templates/movies_list.phtml';
         require 'templates/footer.phtml';
     }
 
 
-    function showMovieById($movie) {
+    function showMovieById($movie, $request) {
         require 'templates/header.phtml';
 
         if ($movie) {
@@ -41,7 +41,7 @@ class movie_view {
     }
 
 
-    function showAdminMovies($movies) {
+    function showAdminMovies($movies, $request) {
         require 'templates/header.phtml';
         require 'templates/admin_movies.phtml';
         require 'templates/footer.phtml';

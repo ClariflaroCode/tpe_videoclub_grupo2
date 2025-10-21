@@ -13,13 +13,13 @@
            $this->view = new DirectorView();
         }
 
-        public function showDirectors() {
+        public function showDirectors($request) {
             $directors = $this->model->showDirectors();
-            $this->view->showDirectors($directors);
+            $this->view->showDirectors($directors, $request);
         }
-        public function listDirectors() {
+        public function listDirectors($request) {
             $directors = $this->model->showDirectors();
-            $this->view->listDirectors($directors);
+            $this->view->listDirectors($directors, $request);
         }
    }   
 

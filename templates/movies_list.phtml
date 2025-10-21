@@ -1,20 +1,27 @@
 
 <section>
-    <form action="peliculas">
-        <label>Filtrar por director</label>
-        <select name="director_id" class="input" required>
-            <?php foreach ($directors as $d): ?>
-                <option value="<?= $d->id ?>">
-                    <?= $d->nombre ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-        <button type="submit">Filtrar</button>
+    <form action="peliculas" class="filter">
+        <fieldset>
+            <label class="resaltado">Filtrar por director</label>
+            <select name="director_id" class="select" required>
+                <?php foreach ($directors as $d): ?>
+                    <option value="<?= $d->id ?>">
+                        <?= $d->nombre ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </fieldset>
+
+        <button type="submit" class="button">Filtrar</button>
     </form>
 </section>
-<section class="peliculas-listado">
-    <?php foreach ($movies as $movie): ?>
-        <article class="pelicula-card">
+    <?php if ($director): ?>
+        <h2>Listado de peliculas del director <span class="resaltado"><?= $director ?></span></h2>
+    <?php endif; ?>
+    <section class="listado">
+
+    <?php if ($movies) : foreach ($movies as $movie): ?>
+        <article class="card">
             <h4><?= $movie->titulo ?></h4>
 
             <img src="<?= $movie->imagen ?>" 
@@ -22,11 +29,14 @@
 
             <p><?= $movie->descripcion ?></p>
 
-            <p class="precio">Precio: $<?= $movie->precio ?></p>
-            <p class="director">Director: <?= $movie->nombre_director ?></p>
-            <p class="categoria">Género: <?= $movie->genero ?></p>
+            <p class="resaltado">Precio: $<?= $movie->precio ?></p>
+            <p class="descripcion">Director: <?= $movie->nombre_director ?></p>
+            <p class="descripcion">Género: <?= $movie->genero ?></p>
 
             <a href="<?= BASE_URL ?>peliculas/<?= $movie->id ?>">Ver más</a>
         </article>
-    <?php endforeach; ?>
-</section>
+        
+    <?php endforeach; else:  ?> 
+        <h2>No se encontraron películas</h2>
+    <?php endif;  ?>
+

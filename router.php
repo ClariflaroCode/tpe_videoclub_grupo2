@@ -33,13 +33,16 @@ switch ($params[0]) {
         break;
         
     case "about":
-        //TODO
+        require_once './templates/header.phtml';
+        require_once './templates/about.phtml';
+        require_once './templates/footer.phtml';
         break;
     case 'login':
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $auth = new auth_controller();
             if($auth->login($_POST['usuario'], $_POST['password'])) {
-                header("Location: " . BASE_URL . "peliculas");
+                header("Location: " . BASE_URL . "admin");
+                exit();
             } else {
                 $controller->showLogin("Usuario o contraseña incorrecta", $request);
             }
@@ -52,7 +55,7 @@ switch ($params[0]) {
         $auth_controller_out->logout($request);
         break;
     case 'directores':
-        $controller_director->listDirectors();        
+        $controller_director->listDirectors($request);        
         break;
     case "admin":
         $guard = new GuardMiddleware();

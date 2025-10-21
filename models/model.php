@@ -23,7 +23,8 @@
                     sexo CHAR(1) NOT NULL,
                     fecha_nacimiento DATE NOT NULL,
                     reputacion INT DEFAULT NULL,
-                    pais_origen VARCHAR(30) NOT NULL
+                    pais_origen VARCHAR(30) NOT NULL, 
+                    imagen TEXT NOT NULL
                 );
 
                 CREATE TABLE pelicula (
@@ -48,11 +49,11 @@
                     password TEXT NOT NULL
                 );
 
-                INSERT INTO director (nombre, sexo, fecha_nacimiento, reputacion, pais_origen) VALUES
-                ('shawn levy', 'm', '1968-07-23', 3, 'canada'),
-                ('andrew adamson', 'm', '1966-12-01', 4, 'nueva zelanda'),
-                ('james cameron', 'm', '1954-08-16', 5, 'canada'),
-                ('steven spielberg', 'm', '1946-12-18', 5, 'estados unidos');
+                INSERT INTO director (nombre, sexo, fecha_nacimiento, reputacion, pais_origen, imagen) VALUES
+                ('shawn levy', 'm', '1968-07-23', 3, 'canada', 'https://upload.wikimedia.org/wikipedia/commons/4/47/Shawn_Levy_in_Moscow%2C_October_2011.jpg'),
+                ('andrew adamson', 'm', '1966-12-01', 4, 'nueva zelanda', 'https://m.media-amazon.com/images/M/MV5BNTU1Nzc4NTkyOV5BMl5BanBnXkFtZTcwODc3NjA4OA@@._V1_.jpg'),
+                ('james cameron', 'm', '1954-08-16', 5, 'canada', 'https://cdn.britannica.com/84/160284-050-695B1DE3/James-Cameron-2012.jpg'),
+                ('steven spielberg', 'm', '1946-12-18', 5, 'estados unidos', 'https://upload.wikimedia.org/wikipedia/commons/6/67/Steven_Spielberg_by_Gage_Skidmore.jpg');
 
                 INSERT INTO pelicula (titulo, duracion, imagen, precio, descripcion, fecha_lanzamiento, atp, director_id, genero, distribuidora) VALUES
                 ('tiburon', 120, 'https://www.lascosasquenoshacenfelices.com/wp-content/uploads/2025/06/Tiburon-las-cosas-felices.01-e1749284997448.jpg', 120.00, 'Un gigantesco tiburón blanco amenaza a los habitantes y turistas de un pueblo costero. El alcalde encomienda la caza del escualo al jefe de la policía, un pescador y un científico. El grupo se da cuenta de que es un animal inteligente y violento.', '1975-06-20', 0, 4, 'terror', 'universal pictures'),

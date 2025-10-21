@@ -55,63 +55,67 @@ main {
     padding: 0 16px;
 }
 
-.peliculas-listado {
-    display: flex;
-    flex-wrap: wrap;
+.listado {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 24px;
     justify-content: center;
     margin: 32px 0;
 }
 
-.pelicula-card {
+.card {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    width: 260px;
     padding: 18px 14px 22px 14px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     transition: transform 0.15s;
+    height: 40rem;
 }
 
-.pelicula-card:hover {
+.card:hover {
     transform: translateY(-4px) scale(1.03);
 }
 
-.pelicula-card img {
+.card img {
     width: 100%;
-    height: 300px;
+    height: 50%;
     object-fit: cover;
     border-radius: 6px;
     margin-bottom: 14px;
     background: #eee;
 }
 
-.pelicula-card h4 {
+.card h4 {
     font-size: 1.8em;
     color: #1a237e;
     margin-bottom: 14px;
 }
 
-.pelicula-card p {
+.card p {
     font-size: 1.15em;
     color: #333;
     margin: 6px 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical; 
+    -webkit-line-clamp: 4; /*Cantidad de lineas que se van a mostrar, el resto se completa con puntos suspensivos. Auspicia midudev*/
+
 }
 
-.pelicula-card .precio {
+.card .resaltado {
     color: #3949ab;
     font-weight: bold;
 }
 
-.pelicula-card .director,
-.pelicula-card .categoria {
+.card .descripcion {
     color: #1565c0;
     font-style: italic;
 }
 
-.pelicula-detalle {
+.detalle {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -125,7 +129,7 @@ main {
     flex-wrap: wrap;
 }
 
-.pelicula-detalle img {
+.detalle img {
     width: 220px;
     height: 330px;
     object-fit: cover;
@@ -135,37 +139,36 @@ main {
     flex-shrink: 0;
 }
 
-.pelicula-detalle-info {
+.detalle-info {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     flex: 1;
 }
 
-.pelicula-detalle-info h2 {
+.detalle-info h2 {
     font-size: 1.8em;
     color: #1a237e;
     margin-bottom: 14px;
 }
 
-.pelicula-detalle-info p {
+.detalle-info p {
     font-size: 1.15em;
     color: #333;
     margin: 6px 0;
 }
 
-.pelicula-detalle-info .precio {
+.resaltado {
     color: #3949ab;
     font-weight: bold;
 }
 
-.pelicula-detalle-info .director,
-.pelicula-detalle-info .categoria {
+.descripcion {
     color: #1565c0;
     font-style: italic;
 }
 
-.pelicula-detalle-info a {
+.detalle-info a {
     display: inline-block;
     margin-top: 24px;
     padding: 10px 24px;
@@ -178,13 +181,13 @@ main {
     box-shadow: 0 2px 8px rgba(26,35,126,0.08);
 }
 
-.pelicula-detalle-info a:hover {
+.detalle-info a:hover {
     background: #3949ab;
 }
 
-.login-form .button,
-.pelicula-card a,
-.pelicula-detalle-info a {
+.login-form .button, 
+.card a,
+.detalle-info a {
     width: 100%;
     padding: 12px;
     background: #1a237e;
@@ -201,8 +204,8 @@ main {
 }
 
 .login-form .button:hover,
-.pelicula-card a:hover,
-.pelicula-detalle-info a:hover {
+.card a:hover,
+.detalle-info a:hover {
     background: #3949ab;
 }
 
@@ -268,6 +271,7 @@ main {
     justify-content: center;
     width: 100%;
     max-width: 900px;
+    align-items: center;
 }
 
 
@@ -325,7 +329,8 @@ main {
 
 .admin-form .input, 
 .admin-form select, 
-.admin-form textarea {
+.admin-form textarea,
+.filter select {
     width: 100%;
     padding: 10px 12px;
     margin-bottom: 16px;
@@ -385,4 +390,47 @@ main {
     font-size: 1em;
     letter-spacing: 1px;
     box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+}
+
+.filter {
+    display: flex;
+    gap: 1rem;
+    width: 30vw;
+    
+}
+.filter fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border: none;
+}
+
+.filter .button {
+    width: 20%;
+    padding: .5rem;
+    background-color: #a8ade4;
+    border-radius: 5px;
+    clip-path: polygon(10% 10%, 70% 10%, 90% 50%, 70% 90%, 10% 90% ); /*Cositas cool para hacer formitas, esto hace la flechita pero podes hacer banda de formitas, yo le paso coordenadas acá y une los puntos recortando sobre lo que tenga, por eso require un ancho o fondo*/
+    cursor: pointer;
+    color: #1a237e;
+    font-weight: bolder;
+
+}
+
+.filter .button:hover {
+    animation: bailecitoCool .6s infinite; /*baila nena ;) maramá jsjs */
+
+}
+@keyframes bailecitoCool {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-10deg);
+  }
+
+  100% {
+    transform: rotate(0deg) ;
+  }
 }

@@ -24,9 +24,14 @@
             return false;
         }
         public function logout($request) {
+            session_start();
+            unset($_SESSION["usuario"]);
+            unset($_SESSION["USER_ID"]);
+            unset($_SESSION["USER_NAME"]);
+
             session_destroy();
             header("Location: " .BASE_URL."login");
-            return;
+            die();
         }
     }
 ?>  
