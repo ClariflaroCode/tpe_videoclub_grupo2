@@ -15,6 +15,8 @@ class movie_controller {
     }
 
     public function showMovies($request) {
+        $director = null;
+
         if (!empty($_GET['director_id'])){
             $movies = $this->model->getMoviesbyDirector($_GET['director_id']);
             $director = $this->directorModel->getDirectorById($_GET['director_id'])->nombre;
@@ -39,7 +41,7 @@ class movie_controller {
     }
 
     public function showError($error, $request) {
-        $this->view->showError($error,$request);
+        $this->view->showError($error);
     }
 
     public function showLogin($error, $request) {

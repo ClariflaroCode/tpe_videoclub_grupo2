@@ -22,7 +22,7 @@ class movie_view {
     }
 
 
-    function showError($error, $request) {
+    function showError($error) {
         echo "<h2>$error</h2>";
         echo "<a href='" . BASE_URL . "peliculas'>Volver</a>";
     }

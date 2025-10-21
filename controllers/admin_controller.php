@@ -29,6 +29,70 @@ class admin_controller {
         $this->view->showMovieForm(null, $directors, $error, $request);
     }
 
+    public function validateMovieInputs ($data) {
+        define("MIN_ATP", 0);
+        define("MAX_ATP", 1);
+
+
+        $fecha = $data['fecha'];
+        $arregloFecha = explode("-", $fecha);
+
+        if (count($arregloFecha) == 3) {
+            $anio = (int) $arregloFecha[0];
+            $mes = (int) $arregloFecha[1];
+            $dia = (int) $arregloFecha[2];
+
+            if (!checkdate($mes, $dia, $anio)) {
+                $this->movie_view->showError("La fecha es incorrecta");
+                return false;
+            } 
+        } else {
+            $this->view->showError("La fecha no respeta el formato");
+            return false;
+        }
+
+        if (((int)$data['atp'] < MIN_ATP) || ((int)$data['atp'] > MAX_ATP)) {
+            $this->view->showError("El valor de atp es incorrecto, ingrese un valor entre" . MIN_ATP." y ". MAX_ATP);
+            return false;
+        }
+
+        if($data['precio'] < 0 || !ctype_digit($data['precio'])) { //La funcion ctype_digit verifica que todos los caracteres sean digitos
+            $this->view->showError("El precio ingresado es inválido");
+            return false;
+        }
+
+        if($data['duracion'] < 0 || !ctype_digit($data['duracion'])) {
+            $this->view->showError("La duracion ingresada es inválida");
+            return false;
+        }
+
+        return true;
+        
+    }
+
+    public function showPostMovieError($error) {
+        $campos = [
+            "titulo" => "titulo", 
+            "descripcion" => "descripcion",
+            "duracion" => "duracion",
+            "fecha" => "fecha de lanzazmiento",
+            "atp" => "atp",
+            "imagen" => "imagen",
+            "distribuidora" => "distribuidora",
+            "precio" => "precio",
+            "director_id" => "director_id",
+            "genero" => "genero"
+        ];
+        $item = "";
+        foreach($campos as $clave =>$traduccion) {
+            if ($error == $clave) {
+                $item = $traduccion;
+                break;
+            }
+        }
+        $this->view->showError("Falta completar el campo ".$item);
+    }
+
     public function addMovie($request) {
         $titulo = $_POST['titulo'];
         $descripcion = $_POST['descripcion'];
@@ -41,10 +105,24 @@ class admin_controller {
         $director_id = $_POST['director_id'];
         $genero = $_POST['genero'];
 
-        if($this->model->addMovie($titulo, $duracion, $imagen, $precio, $descripcion, $fecha_lanzamiento, $atp, $director_id, $genero, $distribuidora)) {
-            header("Location: " . BASE_URL . "admin/movies");
-        } else {
-            $this->addMovieForm("Error al agregar la película.", $request);
+        if (
+            !empty($titulo) && isset($titulo) &&
+            !empty($descripcion) && isset($descripcion) &&
+            !empty($duracion) && isset($duracion) &&
+            !empty($fecha_lanzamiento) && isset($fecha_lanzamiento) &&
+            !empty($atp) && isset($atp) &&
+            !empty($imagen) && isset($imagen) &&
+            !empty($distribuidora) && isset($distribuidora) &&
+            !empty($precio) && isset($precio) &&
+            !empty($director_id) && isset($director_id) &&
+            !empty($genero) && isset($genero) 
+        ) 
+        if ($this->validateMovieInputs($_POST)) { 
+            if($this->model->addMovie($titulo, $duracion, $imagen, $precio, $descripcion, $fecha_lanzamiento, $atp, $director_id, $genero, $distribuidora)) {
+                header("Location: " . BASE_URL . "admin/movies");
+            } else {
+                $this->addMovieForm("Error al agregar la película.", $request);
+            }
         }
     }
 
@@ -66,10 +144,26 @@ class admin_controller {
         $director_id = $_POST['director_id'];
         $genero = $_POST['genero'];
 
-        if($this->model->updateMovie($id, $titulo, $duracion, $precio, $descripcion, $fecha_lanzamiento, $atp, $genero, $distribuidora)) {
-            header("Location: " . BASE_URL . "admin/movies");
-        } else {
-            $this->editMovieForm($id, "Error al editar la película.", $request);
+        if (
+            !empty($id) && isset($id) &&
+            !empty($titulo) && isset($titulo) &&
+            !empty($descripcion) && isset($descripcion) &&
+            !empty($duracion) && isset($duracion) &&
+            !empty($fecha_lanzamiento) && isset($fecha_lanzamiento) &&
+            !empty($atp) && isset($atp) &&
+            !empty($imagen) && isset($imagen) &&
+            !empty($distribuidora) && isset($distribuidora) &&
+            !empty($precio) && isset($precio) &&
+            !empty($director_id) && isset($director_id) &&
+            !empty($genero) && isset($genero) 
+        )
+        
+        if($this->validateMovieInputs($_POST)) {
+            if($this->model->updateMovie($id, $titulo, $duracion, $precio, $descripcion, $fecha_lanzamiento, $atp, $genero, $distribuidora)) {
+                header("Location: " . BASE_URL . "admin/movies");
+            } else {
+                $this->editMovieForm($id, "Error al editar la película.", $request);
+            }
         }
     }
 
