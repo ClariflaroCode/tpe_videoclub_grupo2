@@ -4,7 +4,7 @@
 
 
        <label for="nombre">Nombre</label>
-       <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del director" class="input"  value="<?= $nombre ?>" required>
+       <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del director" class="input"  value="<?= $nombre ?? null ?>" required>
 
 
        <label for="sexo">Sexo</label>
@@ -23,10 +23,10 @@
 
 
        <label for="pais_origen">Pais de origen </label>
-       <input type="text" name="pais_origen" id="pais_origen" placeholder="Ingrese el pais de origen" class="input"  value= "<?= $pais ?>" required>
+       <input type="text" name="pais_origen" id="pais_origen" placeholder="Ingrese el pais de origen" class="input"  value= "<?= $pais ?? null ?>" required>
 
        <label for="imagen">Imagen del director </label>
-       <input type="text" name="imagen" id="imagen" placeholder="Ingrese la url de la imagen" value="<?= $imagen ?>" class="input" required>
+       <input type="text" name="imagen" id="imagen" placeholder="Ingrese la url de la imagen" value="<?= $imagen ?? null ?>" class="input" required>
 
        <button type="submit" class="button">Enviar</button>
    </fieldset>

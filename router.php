@@ -80,7 +80,7 @@ switch ($params[0]) {
                 break;
                 }
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $admin_controller->editMovie($request);
+                    $admin_controller->editMovie($id,$request);
                 } else {
                     $admin_controller->editMovieForm($id, null, $request);
                 }
